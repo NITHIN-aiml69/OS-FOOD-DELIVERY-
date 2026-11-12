@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  # Core Food Delivery Operating System Platform Service
+  food-delivery-platform:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: food-delivery-platform:25BTRPW066
+    container_name: food_delivery_core
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - PLATFORM_ENV=production
+      - CONCURRENT_USERS=349
+      - REDIS_HOST=redis-cache
+      - REDIS_PORT=6379
+    depends_on:
+      redis-cache:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 1024M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/healthz"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    networks:
+      - delivery_net
+
+  # In-Memory Cache mitigating Module 9's 49% I/O Wait Bottleneck
+  redis-cache:
+    image: redis:7.0-alpine
+    container_name: delivery_redis_cache
+    restart: always
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes", "--appendfsync", "everysec"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+    networks:
+      - delivery_net
+
+networks:
+  delivery_net:
+    driver: bridge

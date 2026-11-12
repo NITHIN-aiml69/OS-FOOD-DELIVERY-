@@ -1,0 +1,30 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C Binaries (compiled for host architecture)
+module1_io_dma/dma_trace
+module2_kernel_arch/fork_exec_monolithic
+module4_concurrency_deadlock/sync_posix
+*.o
+*.out
+
+# macOS metadata
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Vercel
+.vercel
+
+# IDE / Editor artifacts
+.vscode/
+.idea/
