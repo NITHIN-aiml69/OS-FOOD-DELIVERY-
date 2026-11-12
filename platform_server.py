@@ -350,6 +350,10 @@ HTML_DASHBOARD = """
 """
 
 @app.route("/")
+@app.route("/api")
+@app.route("/api/")
+@app.route("/api/index")
+@app.route("/api/index/")
 def index():
     return render_template_string(HTML_DASHBOARD, state=STATE)
 
