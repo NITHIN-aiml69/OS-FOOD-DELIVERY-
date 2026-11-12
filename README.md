@@ -1,7 +1,10 @@
 # Operating Systems Experimental Lab: High-Concurrency Food Delivery Platform
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FNITHIN-aiml69%2FOS-FOOD-DELIVERY-)
+
 **Student Name:** NITHIN N  
 **Roll Number:** `25BTRPW066`  
+**GitHub Repository:** [https://github.com/NITHIN-aiml69/OS-FOOD-DELIVERY-](https://github.com/NITHIN-aiml69/OS-FOOD-DELIVERY-)  
 **Platform Architecture:** Distributed Cloud & Edge Food Delivery Platform (Order Ingestion, Matching, Telemetry, and Accounting)  
 **Execution Environment:** macOS / Linux (POSIX-compliant, Python 3.13, Clang/GCC)
 
