@@ -51,6 +51,30 @@ The project implements mathematical models, POSIX multithreaded and process prim
 
 ---
 
+## 🚀 Deployment (Local, Docker, Kubernetes & Vercel)
+
+### 1. Cloud Deployment via Vercel:
+The project includes serverless WSGI configuration ([`api/index.py`](file:///Users/nithinn/Downloads/OS%20EXP%20LEARNING/api/index.py), [`vercel.json`](file:///Users/nithinn/Downloads/OS%20EXP%20LEARNING/vercel.json), and [`requirements.txt`](file:///Users/nithinn/Downloads/OS%20EXP%20LEARNING/requirements.txt)).
+- **Via GitHub:** Push this repo to GitHub, open [Vercel](https://vercel.com/new), click **Import**, and click **Deploy**.
+- **Via Vercel CLI:** Run `./deploy_cloud.sh` or `npx vercel --prod`.
+
+### 2. Live Local Dashboard:
+```bash
+python3 platform_server.py
+```
+Visit: [http://localhost:8080](http://localhost:8080)
+
+### 3. Docker & Kubernetes:
+```bash
+# Docker Compose
+docker-compose up --build
+
+# Kubernetes
+kubectl apply -f k8s/
+```
+
+---
+
 ## 🚀 Quick Start: Running Experiments
 
 ### Run All Modules Concurrently (Automated Suite):
