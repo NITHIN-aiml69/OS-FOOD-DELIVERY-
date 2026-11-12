@@ -10,6 +10,13 @@ module4_concurrency_deadlock/sync_posix
 *.o
 *.out
 
+# Separate projects in directory
+cyber_log_analyzer/
+cyber_log_analyzer*
+Cybersecurity_Log_Analyzer*
+FINAL_MINI_PROJECT_REPORT.html
+PRESENTATION_SLIDES.html
+
 # macOS metadata
 .DS_Store
 .AppleDouble
