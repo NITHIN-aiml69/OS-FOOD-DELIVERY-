@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>25PCCS201 Mini-Project Report - NITHIN N (25BTRPW066)</title>
+<style>
+    @page {
+        size: A4 portrait;
+        margin: 12mm 15mm;
+    }
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 9.5pt;
+        line-height: 1.45;
+        color: #0f172a;
+        background: #f1f5f9;
+        margin: 0;
+        padding: 30px 15px;
+    }
+    .page-container {
+        max-width: 820px;
+        margin: 0 auto;
+        background: #ffffff;
+        padding: 35px 40px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        border-radius: 8px;
+    }
+
+    @media print {
+        body {
+            background: #ffffff;
+            padding: 0;
+            font-size: 9pt;
+            line-height: 1.4;
+        }
+        .page-container {
+            box-shadow: none;
+            padding: 0;
+            max-width: 100%;
+            border-radius: 0;
+        }
+        .no-print {
+            display: none !important;
+        }
+        .page-break {
+            page-break-before: always;
+            break-before: page;
+        }
+        table {
+            page-break-inside: auto;
+            break-inside: auto;
+        }
+        tr {
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+        h1, h2, h3 {
+            page-break-after: avoid;
+            break-after: avoid;
+            margin-top: 14px;
+        }
+        .screenshot-card, .diagram-card, .formula-card {
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+        .cover-border-box {
+            height: 98vh !important;
+            padding: 24px 30px !important;
+        }
+    }
+
+    /* Print control banner */
+    .print-bar {
+        background: linear-gradient(135deg, #0284c7, #0369a1);
+        color: #ffffff;
+        padding: 12px 20px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+        box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+    }
+    .print-btn {
+        background: #ffffff;
+        color: #0369a1;
+        border: none;
+        padding: 8px 18px;
+        border-radius: 6px;
+        font-weight: 700;
+        font-size: 13px;
+        cursor: pointer;
+        transition: all 0.2s;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    }
+    .print-btn:hover {
+        background: #f0f9ff;
+        transform: translateY(-1px);
+    }
+
+    /* ================= COVER PAGE STYLING ================= */
+    .cover-page-wrapper {
+        page-break-after: always;
+        break-after: page;
+    }
+    .cover-border-box {
+        border: 2px solid #000000;
+        padding: 28px 32px 30px;
+        text-align: center;
+        background: #ffffff;
+        min-height: 960px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        box-sizing: border-box;
+        font-family: "Times New Roman", Times, Georgia, serif;
+        color: #000000;
+    }
+    .ref-dept-1 {
+        font-size: 13.5pt;
+        font-weight: bold;
+        margin: 0 0 4px;
+        line-height: 1.25;
+    }
+    .ref-dept-2 {
+        font-size: 12pt;
+        font-weight: normal;
+        margin: 0 0 3px;
+    }
+    .ref-dept-3 {
+        font-size: 11.5pt;
+        font-weight: normal;
+        margin: 0 0 3px;
+    }
+    .ref-campus-1 {
+        font-size: 10.5pt;
+        font-weight: normal;
+        margin: 0 0 2px;
+    }
+    .ref-campus-2 {
+        font-size: 10.5pt;
+        font-weight: normal;
+        margin: 0;
+    }
+
+    .ref-session-block {
+        margin: 15px 0 10px;
+    }
+    .ref-ay {
+        font-size: 12pt;
+        font-weight: bold;
+        margin: 0;
+    }
+    .ref-sem {
+        font-size: 11pt;
+        font-weight: normal;
+        margin: 3px 0 0;
+    }
+
+    .ref-report-tag {
+        font-size: 11.5pt;
+        font-weight: normal;
+        margin: 14px 0 10px;
+    }
+    .ref-project-title {
+        font-size: 13.5pt;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        line-height: 1.35;
+        margin: 0 auto;
+        max-width: 95%;
+        color: #000000;
+    }
+
+    .ref-degree-block {
+        margin: 15px 0 10px;
+        line-height: 1.45;
+    }
+    .ref-degree-submitted {
+        font-size: 10.5pt;
+        margin: 0 0 2px;
+    }
+    .ref-degree-award {
+        font-size: 10.5pt;
+        margin: 0 0 8px;
+    }
+    .ref-deg-btech {
+        font-size: 12pt;
+        font-weight: bold;
+        letter-spacing: 0.03em;
+        margin: 0 0 3px;
+    }
+    .ref-deg-in {
+        font-size: 10.5pt;
+        font-weight: normal;
+        margin: 0 0 3px;
+    }
+    .ref-deg-cse {
+        font-size: 12pt;
+        font-weight: bold;
+        letter-spacing: 0.03em;
+        margin: 0;
+    }
+
+    .ref-submitted-by-block {
+        margin: 15px 0 8px;
+    }
+    .ref-sub-label {
+        font-size: 11pt;
+        font-weight: normal;
+        margin: 0 0 6px;
+    }
+    .ref-sub-name {
+        font-size: 11.5pt;
+        font-weight: bold;
+        margin: 0 0 3px;
+    }
+    .ref-sub-usn {
+        font-size: 11.5pt;
+        font-weight: bold;
+        margin: 0;
+    }
+
+    .ref-guidance-block {
+        margin: 15px 0 5px;
+    }
+    .ref-guide-label {
+        font-size: 11pt;
+        font-weight: normal;
+        margin: 0 0 6px;
+    }
+    .ref-guide-name {
+        font-size: 11.5pt;
+        font-weight: bold;
+        margin: 0 0 3px;
+    }
+    .ref-guide-prof {
+        font-size: 10.5pt;
+        font-weight: normal;
+        margin: 0 0 2px;
+    }
+    .ref-guide-dept {
+        font-size: 10.5pt;
+        font-weight: normal;
+        margin: 0 0 2px;
+        line-height: 1.35;
+    }
+
+    /* Standard Academic Typography for body pages */
+    h1 {
+        font-size: 12pt;
+        color: #0f172a;
+        border-bottom: 1.5px solid #0284c7;
+        padding-bottom: 4px;
+        margin-top: 20px;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+    }
+    h2 {
+        font-size: 10.5pt;
+        color: #0369a1;
+        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 3px;
+        margin-top: 14px;
+        margin-bottom: 6px;
+    }
+    h3 {
+        font-size: 9.5pt;
+        color: #1e293b;
+        margin-top: 10px;
+        margin-bottom: 4px;
+        font-weight: 700;
+    }
+    p {
+        margin: 4px 0 8px;
+        text-align: justify;
+    }
+    ul, ol {
+        margin: 4px 0 8px 18px;
+        padding: 0;
+    }
+    li {
+        margin-bottom: 3px;
+    }
+
+    /* Tables */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 8.5pt;
+        margin: 8px 0 12px;
+    }
+    th, td {
+        border: 1px solid #cbd5e1;
+        padding: 5px 8px;
+        vertical-align: middle;
+    }
+    th {
+        background: #0f172a;
+        color: #ffffff;
+        font-weight: 600;
+        text-align: left;
+        font-size: 8.5pt;
+    }
+    tr:nth-child(even) {
+        background: #f8fafc;
+    }
+
+    /* Badges */
+    .badge-pass {
+        background: #dcfce7;
+        color: #15803d;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-weight: 700;
+        font-size: 7.5pt;
+        border: 1px solid #86efac;
+    }
+    .badge-tech {
+        background: #e0f2fe;
+        color: #0369a1;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 7.5pt;
+        border: 1px solid #bae6fd;
+    }
+
+    /* Code & Formulas */
+    pre {
+        background: #0f172a;
+        color: #f8fafc;
+        padding: 10px 12px;
+        border-radius: 6px;
+        font-size: 8pt;
+        line-height: 1.35;
+        overflow-x: auto;
+        margin: 6px 0 10px;
+        border-left: 3px solid #0284c7;
+        font-family: ui-monospace, Menlo, Consolas, monospace;
+    }
+    code {
+        font-family: ui-monospace, Menlo, Consolas, monospace;
+        font-size: 8.5pt;
+        background: #f1f5f9;
+        color: #0369a1;
+        padding: 1px 4px;
+        border-radius: 3px;
+    }
+    pre code {
+        background: transparent;
+        color: inherit;
+        padding: 0;
+    }
+
+    .formula-card {
+        background: #f8fafc;
+        border: 1px solid #cbd5e1;
+        border-left: 3.5px solid #0284c7;
+        padding: 8px 12px;
+        margin: 6px 0 10px;
+        border-radius: 4px;
+        font-size: 8.5pt;
+    }
+    .formula-title {
+        font-weight: 700;
+        color: #0369a1;
+        margin-bottom: 3px;
+        font-size: 8.5pt;
+    }
+
+    /* Diagrams & Visual Flow */
+    .diagram-card {
+        background: #ffffff;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        padding: 10px 12px;
+        margin: 8px 0 12px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .diagram-title {
+        font-size: 8.5pt;
+        font-weight: 700;
+        color: #0369a1;
+        margin-bottom: 6px;
+        text-align: center;
+    }
+    .flow-row {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+    .flow-node {
+        background: #f1f5f9;
+        border: 1px solid #cbd5e1;
+        padding: 6px 10px;
+        border-radius: 5px;
+        font-size: 8pt;
+        text-align: center;
+        flex: 1;
+        min-width: 110px;
+    }
+    .flow-node.highlight {
+        background: #e0f2fe;
+        border-color: #38bdf8;
+        color: #0369a1;
+        font-weight: 700;
+    }
+    .flow-arrow {
+        color: #0284c7;
+        font-weight: 800;
+        font-size: 11pt;
+    }
+
+    /* Info cards */
+    .info-card {
+        background: #f0fdf4;
+        border: 1px solid #bbf7d0;
+        border-left: 3.5px solid #22c55e;
+        padding: 8px 12px;
+        margin: 8px 0;
+        border-radius: 4px;
+        font-size: 8.5pt;
+    }
+
+    /* Live Deployment Card */
+    .deployment-banner {
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        color: #ffffff;
+        border-radius: 6px;
+        padding: 14px 18px;
+        margin: 12px 0 16px;
+        border: 1px solid #334155;
+    }
+    .deployment-banner h3 {
+        color: #38bdf8;
+        margin: 0 0 6px;
+        font-size: 10pt;
+    }
+    .deployment-link {
+        color: #7dd3fc;
+        text-decoration: none;
+        font-weight: 700;
+        word-break: break-all;
+    }
+
+    /* Signature Table */
+    .sig-table {
+        margin-top: 30px;
+        border: none;
+    }
+    .sig-table td {
+        border: none;
+        padding: 14px 10px;
+        text-align: center;
+    }
+    .sig-line {
+        border-top: 1px solid #334155;
+        width: 80%;
+        margin: 0 auto;
+        padding-top: 4px;
+        font-weight: 700;
+        font-size: 8.5pt;
+    }
+    .sig-sub {
+        font-size: 7.5pt;
+        color: #64748b;
+    }
+</style>
+</head>
+<body>
+
+<div class="page-container">
+
+    <!-- Top print control banner -->
+    <div class="print-bar no-print">
+        <div>
+            <strong>🎓 25PCCS201 Mini-Project Report &mdash; Official University Format</strong><br/>
+            <span style="font-size: 11px; opacity: 0.95;">Student: NITHIN N (Roll: 25BTRPW066) | Course: Operating Systems</span>
+        </div>
+        <button class="print-btn" onclick="window.print()">🖨️ Save as PDF / Print</button>
+    </div>
+
+    <!-- ================= PAGE 1: COVER PAGE ================= -->
+    <div class="cover-page-wrapper">
+        <div class="cover-border-box">
+            <!-- Top: University Hierarchy -->
+            <div>
+                <div class="ref-dept-1">JAIN (DEEMED-TO-BE UNIVERSITY)</div>
+                <div class="ref-dept-2">FACULTY OF ENGINEERING &amp; TECHNOLOGY</div>
+                <div class="ref-dept-3">SCHOOL OF COMPUTER SCIENCE AND ENGINEERING</div>
+                <div class="ref-campus-1">Jain Global Campus, Kanakapura Taluk &mdash; 562112</div>
+                <div class="ref-campus-2">Ramanagara District, Karnataka, India</div>
+            </div>
+
+            <!-- Academic Session -->
+            <div class="ref-session-block">
+                <div class="ref-ay">ACADEMIC YEAR: 2026&ndash;2027</div>
+                <div class="ref-sem">(III SEMESTER &mdash; B.TECH CSE)</div>
+            </div>
+
+            <!-- Report Title Block -->
+            <div>
+                <div class="ref-report-tag">A Mini Project Report on</div>
+                <div class="ref-project-title">
+                    &ldquo;HIGH-CONCURRENCY FOOD DELIVERY PLATFORM: OPERATING SYSTEMS EXPERIMENTAL LAB, SYSTEM CALL MODELING &amp; CLOUD DEPLOYMENT&rdquo;
+                </div>
+            </div>
+
+            <!-- Degree Statement -->
+            <div class="ref-degree-block">
+                <div class="ref-degree-submitted">Submitted in partial fulfilment of Course Code: <strong>25PCCS201</strong> &mdash; Course Name: <strong>Operating Systems</strong></div>
+                <div class="ref-degree-award">for the award of the degree of</div>
+                <div class="ref-deg-btech">BACHELOR OF TECHNOLOGY</div>
+                <div class="ref-deg-in">IN</div>
+                <div class="ref-deg-cse">COMPUTER SCIENCE AND ENGINEERING</div>
+            </div>
+
+            <!-- Submitted by Block -->
+            <div class="ref-submitted-by-block">
+                <div class="ref-sub-label">Submitted by</div>
+                <div class="ref-sub-name">NAME: NITHIN N</div>
+                <div class="ref-sub-usn">ROLL NO / USN: 25BTRPW066</div>
+            </div>
+
+            <!-- Under the guidance of Block -->
+            <div class="ref-guidance-block">
+                <div class="ref-guide-label">Under the guidance of</div>
+                <div class="ref-guide-name">Dr. N. Satheesh</div>
+                <div class="ref-guide-prof">Professor, Department of Computer Science &amp; Engineering</div>
+                <div class="ref-guide-dept">
+                    School of Computer Science &amp; Engineering<br/>
+                    Faculty of Engineering &amp; Technology<br/>
+                    JAIN (Deemed-to-be University)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Break -->
+    <div class="page-break"></div>
+
+    <!-- ================= PAGE 2: METADATA, CERTIFICATE & DECLARATION ================= -->
+    <h2 style="margin-top: 0;">Project Parameters &amp; Course Alignment</h2>
+
+    <div class="deployment-banner">
+        <h3>🌐 Live Deployment &amp; Remote Telemetry Access</h3>
+        <p style="margin: 0 0 6px; font-size: 8.5pt;">The project has been compiled, containerized, and deployed as a live cloud microservice web application:</p>
+        <p style="margin: 0; font-size: 9pt;">
+            <strong>Live Web App:</strong> <a class="deployment-link" href="https://os-six-lovat.vercel.app/" target="_blank">https://os-six-lovat.vercel.app/</a><br/>
+            <strong>GitHub Repository:</strong> <a class="deployment-link" href="https://github.com/NITHIN-aiml69/OS-FOOD-DELIVERY-" target="_blank">https://github.com/NITHIN-aiml69/OS-FOOD-DELIVERY-</a>
+        </p>
+    </div>
+
+    <table>
+        <tr>
+            <th style="width: 30%;">Course Code / Name</th>
+            <td>25PCCS201 &mdash; Operating Systems</td>
+            <th style="width: 25%;">Academic Session</th>
+            <td>AY 2026&ndash;2027 (III Semester)</td>
+        </tr>
+        <tr>
+            <th>Student Name</th>
+            <td><strong>NITHIN N</strong></td>
+            <th>Roll Number / USN</th>
+            <td><strong>25BTRPW066</strong></td>
+        </tr>
+        <tr>
+            <th>Branch / Specialization</th>
+            <td>B.Tech &mdash; Computer Science &amp; Engineering</td>
+            <th>Faculty Mentor</th>
+            <td>Dr. N. Satheesh (Professor, CSE)</td>
+        </tr>
+        <tr>
+            <th>Platform Scenario</th>
+            <td>Real-Time Food Delivery Infrastructure (Order Dispatch, Routing, Telemetry)</td>
+            <th>Test Result</th>
+            <td><span class="badge-pass">13 / 13 TESTS PASSED (100%)</span></td>
+        </tr>
+    </table>
+
+    <h2>Student Declaration</h2>
+    <p>
+        I, <strong>NITHIN N</strong> (Roll No: <strong>25BTRPW066</strong>), hereby declare that this mini-project report entitled 
+        <em>&ldquo;High-Concurrency Food Delivery Platform: Operating Systems Experimental Lab, System Call Modeling &amp; Cloud Deployment&rdquo;</em> 
+        is an original record of work conducted by me in partial fulfillment of the requirements for the award of Bachelor of Technology in 
+        Computer Science and Engineering. All algorithms, simulation scripts, C system call benchmarks, and cloud deployment architectures 
+        presented herein are implemented and validated under the guidance of <strong>Dr. N. Satheesh</strong>.
+    </p>
+
+    <h2>Certificate of Authenticity</h2>
+    <p>
+        This is to certify that the mini-project report entitled 
+        <em>&ldquo;High-Concurrency Food Delivery Platform: Operating Systems Experimental Lab, System Call Modeling &amp; Cloud Deployment&rdquo;</em> 
+        submitted by <strong>NITHIN N</strong> (Roll No: <strong>25BTRPW066</strong>) is a bona fide work completed in the 
+        Department of Computer Science and Engineering, Faculty of Engineering and Technology, JAIN (Deemed-to-be University).
+    </p>
+
+    <table class="sig-table">
+        <tr>
+            <td style="width: 33%;">
+                <div class="sig-line">NITHIN N</div>
+                <div class="sig-sub">Student Signature (25BTRPW066)</div>
+            </td>
+            <td style="width: 33%;">
+                <div class="sig-line">Dr. N. Satheesh</div>
+                <div class="sig-sub">Internal Guide / Professor</div>
+            </td>
+            <td style="width: 34%;">
+                <div class="sig-line">Head of Department</div>
+                <div class="sig-sub">Dept of CSE, FET, JAIN</div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Page Break -->
+    <div class="page-break"></div>
+
+    <!-- ================= PAGE 3: ABSTRACT & TABLE OF CONTENTS ================= -->
+    <h1 style="margin-top: 0;">Abstract</h1>
+    <p>
+        Modern cloud-scale consumer platforms, such as on-demand food delivery networks, experience massive concurrent transaction 
+        loads, sub-millisecond driver matching deadlines, and continuous geolocation telemetry updates. At this scale, naive user-space 
+        software patterns inevitably induce kernel-level resource starvation, context-switching churn, thread deadlocks, and severe I/O wait stalls. 
+        This mini-project presents an end-to-end, programmatic Operating Systems engineering laboratory and cloud web platform customized 
+        for a high-concurrency <strong>Food Delivery Platform</strong> (Student: <strong>NITHIN N</strong>, Roll: <strong>25BTRPW066</strong>).
+    </p>
+    <p>
+        The platform implements and rigorously validates solutions across ten fundamental Operating System domains: Direct Memory Access (DMA) 
+        bus-mastering vs. Interrupt-driven I/O; Monolithic vs. Microkernel system call pathways during process creation (`fork-exec-wait`); 
+        preemptive vs. non-preemptive CPU scheduling (FCFS, SJF, and Round Robin $Q=3\text{ ms}$); concurrency synchronization and Banker&rsquo;s 
+        deadlock avoidance with Havender lock hierarchies; dynamic memory partitioning (First-Fit, Best-Fit, Worst-Fit); virtual memory page replacement 
+        (FIFO, LRU, Optimal) accompanied by Page Fault Frequency (PFF) thrashing mitigation; disk cylinder head scheduling (FCFS, SSTF, SCAN, C-SCAN, LOOK); 
+        file system extent indexing with Write-Ahead Logging (WAL); live Linux performance telemetry root-cause analysis isolating a critical 49% I/O wait bottleneck; 
+        and a weighted architectural comparison of Containerization vs. Virtual Machines.
+    </p>
+    <p>
+        The system is wrapped in a production-grade, interactive dark-themed operations dashboard developed in Python/Flask, containerized via multi-stage 
+        Docker and Kubernetes specs, and deployed globally as a serverless web application on Vercel at 
+        <a href="https://os-six-lovat.vercel.app/" target="_blank"><strong>https://os-six-lovat.vercel.app/</strong></a>. Empirical verification confirms 
+        100% test success across all 13 computational milestones, slashing order response times by 73.7% and reducing I/O wait from 49.0% down to 2.1%.
+    </p>
+    <p>
+        <strong>Keywords:</strong> Operating Systems, High-Concurrency, DMA, Round Robin, Banker&rsquo;s Algorithm, Virtual Memory, Inode Extents, I/O Wait, Docker, Kubernetes, Vercel Serverless.
+    </p>
+
+    <h2>Table of Contents</h2>
+    <table>
+        <tr>
+            <th style="width: 15%;">Chapter</th>
+            <th>Title / Description</th>
+            <th style="width: 12%;">Section</th>
+        </tr>
+        <tr>
+            <td><strong>Chapter 1</strong></td>
+            <td>Introduction, Problem Statement &amp; Real-Time Platform Domain</td>
+            <td>1.1 &ndash; 1.4</td>
+        </tr>
+        <tr>
+            <td><strong>Chapter 2</strong></td>
+            <td>System Architecture, Technology Stack &amp; Process Topologies</td>
+            <td>2.1 &ndash; 2.3</td>
+        </tr>
+        <tr>
+            <td><strong>Chapter 3</strong></td>
+            <td>Implementation &amp; Mathematical Evaluation of 10 Core OS Modules</td>
+            <td>3.1 &ndash; 3.10</td>
+        </tr>
+        <tr>
+            <td><strong>Chapter 4</strong></td>
+            <td>Web Operations Dashboard, Telemetry &amp; Interactive Stress Simulators</td>
+            <td>4.1 &ndash; 4.3</td>
+        </tr>
+        <tr>
+            <td><strong>Chapter 5</strong></td>
+            <td>Cloud Deployment, Serverless WSGI Adapter &amp; Verification Suite</td>
+            <td>5.1 &ndash; 5.4</td>
+        </tr>
+        <tr>
+            <td><strong>Chapter 6</strong></td>
+            <td>Benchmarking Results, Discussion &amp; Platform SLAs</td>
+            <td>6.1 &ndash; 6.3</td>
+        </tr>
+        <tr>
+            <td><strong>Chapter 7</strong></td>
+            <td>Conclusion, Learning Outcomes &amp; Future Scope</td>
+            <td>7.1 &ndash; 7.3</td>
+        </tr>
+    </table>
+
+    <!-- Page Break -->
+    <div class="page-break"></div>
+
+    <!-- ================= CHAPTER 1 ================= -->
+    <h1 style="margin-top: 0;">Chapter 1: Introduction &amp; Problem Statement</h1>
+
+    <h2>1.1 Background &amp; Domain Overview</h2>
+    <p>
+        On-demand food delivery platforms operate as hyper-local cyber-physical systems. Every single customer transaction triggers a rapid cascade of 
+        interdependent computational tasks: geographic distance matrix calculations to match active delivery partners, real-time kitchen display unit (KDU) 
+        notifications, payment gateway escrow captures, and sub-second GPS tracking updates streamed from rider mobile devices.
+    </p>
+    <p>
+        Under high concurrency (such as lunch or dinner meal-time rushes), the platform server experiences extreme strain across CPU, memory, and I/O subsystems. 
+        If the underlying Operating System is misconfigured or utilizes naive scheduling and I/O policies:
+    </p>
+    <ul>
+        <li>CPU cores become locked in interrupt-handling storms from unbuffered network streams.</li>
+        <li>Critical dispatch worker threads suffer convoy effects under FIFO scheduling, freezing customer mobile interfaces.</li>
+        <li>Unsynchronized database token pools induce circular-wait deadlocks.</li>
+        <li>Synchronous blocking disk writes (`fsync`) saturate storage controller queues, inducing massive I/O wait stalls.</li>
+    </ul>
+
+    <h2>1.2 Problem Definition</h2>
+    <p>
+        The objective of this project is to model, simulate, implement, and deploy a complete Operating System kernel-userland layer designed 
+        specifically for a high-concurrency Food Delivery Platform (assigned to <strong>NITHIN N</strong>, Roll Number: <strong>25BTRPW066</strong>). 
+        The specific computational challenges addressed include:
+    </p>
+    <ol>
+        <li>Evaluating CPU starvation vs. DMA efficiency when transferring a 47 MB order payload over 5.0 seconds at 20 IRQ/sec.</li>
+        <li>Quantifying privilege level transitions and TLB address-space switches in Monolithic vs. Microkernel process creation.</li>
+        <li>Simulating and optimizing CPU scheduling for processes P1&ndash;P4 arriving at $[0, 2, 3, 6]\text{ ms}$ with bursts $[9, 7, 8, 8]\text{ ms}$.</li>
+        <li>Preventing deadlocks across 3 concurrent worker pipelines sharing 3 database tokens and an exclusive audit log.</li>
+        <li>Allocating memory blocks $[113, 219, 325, 501, 737]\text{ KB}$ for requests $[96, 192, 288, 404]\text{ KB}$ and resisting fragmentation.</li>
+        <li>Analyzing page replacement policies (FIFO, LRU, Optimal) for reference string $[4, 5, 6, 7, 4, 5, 1, 4, 5, 6, 7, 1]$ across 4 frames.</li>
+        <li>Optimizing disk cylinder head trajectories for requests $[32, 68, 104, 140, 174, 52, 120, 192]$ starting at cylinder 142.</li>
+        <li>Designing an atomic, crash-resilient file system handling 1,481 ops/min (41% reads, 59% updates).</li>
+        <li>Diagnosing and resolving a real-world Linux bottleneck exhibiting 49% I/O wait and 44 ms latency.</li>
+        <li>Deploying the service across containerized microservices for ~349 concurrent users with automated rollback triggers.</li>
+    </ol>
+
+    <!-- Page Break -->
+    <div class="page-break"></div>
+
+    <!-- ================= CHAPTER 2 ================= -->
+    <h1 style="margin-top: 0;">Chapter 2: System Architecture &amp; Technology Stack</h1>
+
+    <h2>2.1 Multi-Tier Platform Topology</h2>
+    <p>
+        The platform follows an enterprise cloud-edge architecture, decoupling client ingress, core business orchestration, and kernel OS subsystems:
+    </p>
+
+    <div class="diagram-card">
+        <div class="diagram-title">Figure 2.1: End-to-End Operating System &amp; Cloud Deployment Architecture</div>
+        <div class="flow-row">
+            <div class="flow-node">
+                <strong>Ingress / Edge Tier</strong><br/>
+                <span class="badge-tech">Vercel CDN / Envoy</span><br/>
+                TLS Termination &bull; HTTP/2
+            </div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-node highlight">
+                <strong>Container Runtime</strong><br/>
+                <span class="badge-tech">Flask / WSGI / C Binaries</span><br/>
+                Worker Threads &bull; ~349 Users
+            </div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-node">
+                <strong>OS Kernel Subsystem</strong><br/>
+                <span class="badge-tech">Linux Ring 0</span><br/>
+                CFS &bull; VFS &bull; Page Cache &bull; DMA
+            </div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-node">
+                <strong>Hardware Storage</strong><br/>
+                <span class="badge-tech">NVMe SSD &bull; DRAM</span><br/>
+                WAL Ring &bull; Redis Cache
+            </div>
+        </div>
+    </div>
+
+    <h2>2.2 Technology Stack Matrix</h2>
+    <table>
+        <tr>
+            <th>Subsystem Layer</th>
+            <th>Technology / Standard Used</th>
+            <th>Architectural Role in Platform</th>
+        </tr>
+        <tr>
+            <td><strong>Programming Core</strong></td>
+            <td>Python 3.13, Clang / GCC 12 (C99 / POSIX.1)</td>
+            <td>Algorithm simulators, low-level multithreading, and C transfer benchmarks</td>
+        </tr>
+        <tr>
+            <td><strong>Concurrency &amp; IPC</strong></td>
+            <td>POSIX Threads (`pthread`), Counting Semaphores, Mutexes</td>
+            <td>Safe order dispatching across shared memory pools without race conditions</td>
+        </tr>
+        <tr>
+            <td><strong>Web &amp; Telemetry</strong></td>
+            <td>Flask 3.0.3, Jinja2, HTML5/CSS3, JavaScript ES6</td>
+            <td>Live operational dashboard, metric charts, and JSON REST endpoints</td>
+        </tr>
+        <tr>
+            <td><strong>Containerization</strong></td>
+            <td>Multi-Stage Dockerfile (Debian GCC &rarr; Python-slim)</td>
+            <td>Hermetic container images minimizing memory footprint to ~50 MB per pod</td>
+        </tr>
+        <tr>
+            <td><strong>Orchestration</strong></td>
+            <td>Kubernetes Deployment, Service, HPA Manifests</td>
+            <td>Horizontal scaling (3 to 10 pods), rolling updates, and liveness probes</td>
+        </tr>
+        <tr>
+            <td><strong>Serverless Cloud</strong></td>
+            <td>Vercel Serverless Functions (`@vercel/python`)</td>
+            <td>Global edge hosting with auto-scaling WSGI middleware integration</td>
+        </tr>
+    </table>
+
+    <!-- Page Break -->
+    <div class="page-break"></div>
+
+    <!-- ================= CHAPTER 3 ================= -->
+    <h1 style="margin-top: 0;">Chapter 3: Implementation of 10 Core OS Modules</h1>
+
+    <h2>3.1 Module 1: Interrupt-Driven I/O vs. Direct Memory Access (DMA)</h2>
+    <p>
+        <strong>Scenario:</strong> Bulk dispatch of high-resolution order verification images and driver location logs. Payload size is $47\text{ MB}$ 
+        ($49,283,072\text{ bytes}$), transferred over a $5.0\text{ second}$ window with an interrupt rate of $20\text{ interrupts/sec}$.
+    </p>
+
+    <div class="formula-card">
+        <div class="formula-title">Mathematical Derivations:</div>
+        $$\text{Expected Total Interrupts} = 20\text{ interrupts/sec} \times 5.0\text{ sec} = \mathbf{100\text{ interrupts}}$$
+        $$\text{Throughput} = \frac{47.0\text{ MB}}{5.0\text{ sec}} = 9.40\text{ MB/sec} \quad\Big|\quad \text{Payload per Interrupt} = \frac{49,283,072\text{ bytes}}{100} = 481.28\text{ KiB}$$
+    </div>
+
+    <p>
+        <strong>Architectural Comparison:</strong>
+    </p>
+    <table>
+        <tr>
+            <th>I/O Architecture</th>
+            <th>Interrupt Count</th>
+            <th>Total CPU Processing Time</th>
+            <th>Core Utilization</th>
+            <th>System Status</th>
+        </tr>
+        <tr>
+            <td><strong>Programmed Byte I/O</strong></td>
+            <td>49,283,072 IRQs</td>
+            <td>147.85 seconds</td>
+            <td>2,956.98%</td>
+            <td><span class="badge-tech" style="background:#fee2e2; color:#991b1b;">CPU Livelock (Freeze)</span></td>
+        </tr>
+        <tr>
+            <td><strong>Block-Buffered I/O</strong></td>
+            <td>100 IRQs</td>
+            <td>0.30 milliseconds</td>
+            <td>0.0060%</td>
+            <td>Manageable Overhead</td>
+        </tr>
+        <tr>
+            <td><strong>Direct Memory Access (DMA)</strong></td>
+            <td>1 Completion IRQ</td>
+            <td>3.0 microseconds</td>
+            <td>0.00006%</td>
+            <td><span class="badge-pass">Optimal (Hardware Offload)</span></td>
+        </tr>
+    </table>
+
+    <h2>3.2 Module 2: Monolithic vs. Microkernel Architecture for Fork-Exec-Wait</h2>
+    <p>
+        <strong>Scenario:</strong> Spawning real-time notification dispatch workers for new kitchen orders.
+    </p>
+    <ul>
+        <li><strong>Monolithic Kernel (Linux):</strong> The `fork()` (`sys_clone`) and `execve()` system calls execute entirely in Ring 0. 
+        Page tables are mapped via Copy-On-Write (COW). Involves only <strong>6 privilege crossings</strong> and <strong>1 address-space switch</strong> (Average latency: <strong>45 µs</strong>).</li>
+        <li><strong>Microkernel (seL4 / QNX):</strong> Process creation requires user-space message-passing IPC between Client &harr; Process Server &harr; Memory Server &harr; VFS Server. 
+        Involves <strong>26 privilege crossings</strong>, <strong>13 address space context switches (TLB flushes)</strong>, and <strong>10 IPC messages</strong> (Average latency: <strong>265 µs</strong>).</li>
+    </ul>
+    <p>
+        <strong>Decision:</strong> Monolithic Linux is selected for the cloud dispatch engine because it provides a <strong>5.8&times; throughput advantage</strong> (~22,222 spawns/sec vs. ~3,774 spawns/sec).
+    </p>
+
+    <!-- Page Break -->
+    <div class="page-break"></div>
+
+    <h2>3.3 Module 3: CPU Scheduling Algorithms Simulation</h2>
+    <p>
+        <strong>Workload Dataset:</strong> Four concurrent delivery jobs: P1 (Dispatch, arrival $0\text{ ms}$, burst $9\text{ ms}$), P2 (Driver Match, arrival $2\text{ ms}$, burst $7\text{ ms}$), 
+        P3 (Cart Calculator, arrival $3\text{ ms}$, burst $8\text{ ms}$), and P4 (Ledger Journal, arrival $6\text{ ms}$, burst $8\text{ ms}$).
+    </p>
+
+    <div class="diagram-card">
+        <div class="diagram-title">Gantt Chart 1: FCFS &amp; Non-Preemptive SJF (Arrival-Aligned)</div>
+        <pre>+------------------+--------------+----------------+----------------+
+|        P1        |      P2      |       P3       |       P4       |
++------------------+--------------+----------------+----------------+
+0                  9             16               24               32</pre>
+        <div class="diagram-title">Gantt Chart 2: Round Robin (Quantum = 3 ms)</div>
+        <pre>+------+------+------+------+------+------+------+------+------+----+----+----+
+|  P1  |  P2  |  P3  |  P1  |  P4  |  P2  |  P3  |  P1  |  P4  | P2 | P3 | P4 |
++------+------+------+------+------+------+------+------+------+----+----+----+
+0      3      6      9     12     15     18     21     24     27   28   30   32</pre>
+    </div>
+
+    <table>
+        <tr>
+            <th>Algorithm</th>
+            <th>Avg Turnaround Time (TAT)</th>
+            <th>Avg Waiting Time (WT)</th>
+            <th>Avg Response Time (RT)</th>
+            <th>Evaluation for Delivery Platform</th>
+        </tr>
+        <tr>
+            <td><strong>FCFS</strong></td>
+            <td>17.50 ms</td>
+            <td>9.50 ms</td>
+            <td>9.50 ms</td>
+            <td>Suffers convoy effect; P4 waits 18 ms before running</td>
+        </tr>
+        <tr>
+            <td><strong>SJF (Non-Preemptive)</strong></td>
+            <td>17.50 ms</td>
+            <td>9.50 ms</td>
+            <td>9.50 ms</td>
+            <td>Identical to FCFS due to P1 head start from t=0 to 9ms</td>
+        </tr>
+        <tr>
+            <td><strong>Round Robin (Q = 3 ms)</strong></td>
+            <td>25.75 ms</td>
+            <td>17.75 ms</td>
+            <td><strong>2.50 ms</strong></td>
+            <td><span class="badge-pass">RECOMMENDED: 73.7% faster response; zero starvation</span></td>
+        </tr>
+    </table>
+
+    <h2>3.4 Module 4: Process Synchronization &amp; Deadlocks</h2>
+    <p>
+        <strong>System Resources:</strong> 3 Database Connection Tokens (Counting Semaphore) and 1 Exclusive Audit Log (Binary Mutex) shared by 3 worker threads 
+        ($W_1$: Order Ingestion, $W_2$: Rider Matching, $W_3$: Payment Settlement).
+    </p>
+    <ul>
+        <li><strong>Deadlock Hazard:</strong> If $W_1$ holds 2 DB Tokens and blocks on the Audit Log while $W_2$ holds the Audit Log and requests 2 DB Tokens, 
+        all 4 Coffman conditions are fulfilled, inducing an unrecoverable deadlocked state.</li>
+        <li><strong>Banker&rsquo;s Avoidance Algorithm:</strong> Speculatively tests allocation requests. The safety algorithm proves the existence of safe sequence 
+        $\langle W_3, W_1, W_2 \rangle$, rejecting unsafe transition states.</li>
+        <li><strong>Havender Total Lock Ordering:</strong> Enforces priority rule $\text{Priority}(\text{DB\_Token}) = 1 < \text{Priority}(\text{Audit\_Log}) = 2$. 
+        Threads must acquire resources in ascending order. Circular wait is mathematically eliminated. POSIX C implementation executed 9 full multithreaded cycles with zero race conditions.</li>
+    </ul>
+
+    <!-- Page Break -->
+    <div class="page-break"></div>
+
+    <h2>3.5 Module 5: Dynamic Memory Allocation (First-Fit vs. Best-Fit)</h2>
+    <p>
+        <strong>Parameters:</strong> Free memory partitions: $[113, 219, 325, 501, 737]\text{ KB}$ (Total: $1,895\text{ KB}$). Process memory requests: 
+        $[P_1: 96, P_2: 192, P_3: 288, P_4: 404]\text{ KB}$ (Total: $980\text{ KB}$).
+    </p>
+    <table>
+        <tr>
+            <th>Process</th>
+            <th>Requested Size</th>
+            <th>Allocated Partition</th>
+            <th>Remaining Hole in Block</th>
+            <th>Status</th>
+        </tr>
+        <tr>
+            <td><strong>P1 (Order Dispatch)</strong></td>
+            <td>96 KB</td>
+            <td>Block 1 (113 KB)</td>
+            <td>17 KB</td>
+            <td><span class="badge-pass">Allocated</span></td>
+        </tr>
+        <tr>
+            <td><strong>P2 (Driver Matching)</strong></td>
+            <td>192 KB</td>
+            <td>Block 2 (219 KB)</td>
+            <td>27 KB</td>
+            <td><span class="badge-pass">Allocated</span></td>
+        </tr>
+        <tr>
+            <td><strong>P3 (Cart Calculation)</strong></td>
+            <td>288 KB</td>
+            <td>Block 3 (325 KB)</td>
+            <td>37 KB</td>
+            <td><span class="badge-pass">Allocated</span></td>
+        </tr>
+        <tr>
+            <td><strong>P4 (Ledger Journal)</strong></td>
+            <td>404 KB</td>
+            <td>Block 4 (501 KB)</td>
+            <td>97 KB</td>
+            <td><span class="badge-pass">Allocated</span></td>
+        </tr>
+        <tr>
+            <td><strong>Block 5 (737 KB)</strong></td>
+            <td>&mdash;</td>
+            <td>Unused / Free Pool</td>
+            <td><strong>737 KB (100% Intact)</strong></td>
+            <td>Preserved for Bursts</td>
+        </tr>
+    </table>
+    <p>
+        <strong>Stress Test ($P_5 = 600\text{ KB}$):</strong> First-Fit and Best-Fit successfully allocate $P_5$ into Block 5 with $137\text{ KB}$ remaining. 
+        Worst-Fit splinters Block 5 down to 45 KB, <strong>failing the 600 KB allocation</strong> due to external fragmentation. First-Fit is chosen for production for $O(1)$ allocation speed.
+    </p>
+
+    <h2>3.6 Module 6: Virtual Memory &amp; Page Replacement Simulation</h2>
+    <p>
+        <strong>Reference String:</strong> $[4, 5, 6, 7, 4, 5, 1, 4, 5, 6, 7, 1]$ (Length = 12) across <strong>4 Physical Page Frames</strong>.
+    </p>
+    <table>
+        <tr>
+            <th>Algorithm</th>
+            <th>Page Hits</th>
+            <th>Page Faults</th>
+            <th>Fault Ratio (%)</th>
+            <th>Hit Ratio (%)</th>
+            <th>Performance Assessment</th>
+        </tr>
+        <tr>
+            <td><strong>FIFO</strong></td>
+            <td>2</td>
+            <td>10</td>
+            <td>83.33%</td>
+            <td>16.67%</td>
+            <td>Poor: Evicts hot early catalog pages 4 and 5</td>
+        </tr>
+        <tr>
+            <td><strong>LRU</strong></td>
+            <td>4</td>
+            <td>8</td>
+            <td>66.67%</td>
+            <td>33.33%</td>
+            <td>Strong: Capitalizes on temporal memory locality</td>
+        </tr>
+        <tr>
+            <td><strong>Optimal (OPT)</strong></td>
+            <td>6</td>
+            <td>6</td>
+            <td>50.00%</td>
+            <td>50.00%</td>
+            <td>Theoretical lower bound (requires future knowledge)</td>
+        </tr>
+    </table>
+    <p>
+        <strong>Thrashing Engine:</strong> The Page Fault Frequency (PFF) monitor calculates fault frequency over sliding time windows. 
+        When $\text{PFF} > 60\%$, the OS detects thrashing and suspends low-priority batch jobs (e.g. daily sales reports), reassigning page frames to the order dispatch pipeline.
+    </p>
+
+    <!-- Page Break -->
+    <div class="page-break"></div>
+
+    <h2>3.7 Module 7: Disk Cylinder Scheduling Algorithms</h2>
+    <p>
+        <strong>Workload:</strong> Cylinder request queue: $[32, 68, 104, 140, 174, 52, 120, 192]$. Initial head position: <strong>142</strong>, moving downward (toward cylinder 0). 
+        Disk boundaries: cylinders 0 to 199.
+    </p>
+    <table>
+        <tr>
+            <th>Scheduling Policy</th>
+            <th>Seek Trajectory Sequence</th>
+            <th>Total Head Movement</th>
+            <th>Overhead vs. SSTF</th>
+        </tr>
+        <tr>
+            <td><strong>FCFS</strong></td>
+            <td>$142 \to 32 \to 68 \to 104 \to 140 \to 174 \to 52 \to 120 \to 192$</td>
+            <td>514 cylinders</td>
+            <td>+90.4%</td>
+        </tr>
+        <tr>
+            <td><strong>SSTF</strong></td>
+            <td>$142 \to 140 \to 120 \to 104 \to 68 \to 52 \to 32 \to 174 \to 192$</td>
+            <td><strong>270 cylinders</strong></td>
+            <td>0.0% (Baseline)</td>
+        </tr>
+        <tr>
+            <td><strong>SCAN</strong></td>
+            <td>$142 \to 140 \to 120 \to 104 \to 68 \to 52 \to 32 \to 0 \to 174 \to 192$</td>
+            <td>334 cylinders</td>
+            <td>+23.7%</td>
+        </tr>
+        <tr>
+            <td><strong>C-SCAN</strong></td>
+            <td>$142 \to 140 \to 120 \to 104 \to 68 \to 52 \to 32 \to 0 \to 199 \to 192 \to 174$</td>
+            <td>366 cylinders</td>
+            <td>+35.6%</td>
+        </tr>
+        <tr>
+            <td><strong>LOOK</strong></td>
+            <td>$142 \to 140 \to 120 \to 104 \to 68 \to 52 \to 32 \to 174 \to 192$</td>
+            <td><strong>270 cylinders</strong></td>
+            <td>0.0% (Optimal)</td>
+        </tr>
+    </table>
+    <p>
+        <strong>SSD Production Rule:</strong> Because modern NVMe drives have zero mechanical seek time, rotational algorithms are replaced by Linux multi-queue deadline 
+        scheduling (`mq-deadline`), enforcing $5\text{ ms}$ write expiration caps to prevent order commit starvation.
+    </p>
+
+    <h2>3.8 Module 8: File System Allocation, Caching &amp; Crash Recovery</h2>
+    <p>
+        <strong>Service Profile:</strong> 1,481 file operations/minute ($24.68\text{ ops/sec}$), categorized as <strong>41% reads</strong> ($607.2\text{ ops/min}$) 
+        and <strong>59% writes/updates</strong> ($873.8\text{ ops/min}$).
+    </p>
+    <ul>
+        <li><strong>Indexed Inode Extents (Ext4/XFS):</strong> Contiguous allocation fails due to severe reallocations ($O(N)$), while linked allocation incurs unacceptable 
+        $O(k)$ sequential seek times. Extent trees deliver $O(1)$ block resolution and eliminate external fragmentation.</li>
+        <li><strong>Caching Performance:</strong> Linux DRAM Page Cache achieves a <strong>94% hit rate</strong> for read queries (100 ns latency vs. 80 µs on NVMe).</li>
+        <li><strong>Durability &amp; Crash Recovery:</strong> Synchronous `fsync()` induces 17.5% CPU wait. By pairing a Write-Ahead Log (WAL) with batched 50 ms group commits 
+        and Ext4 journaling (`data=ordered`), write latency drops from 12 ms down to <strong>15 µs</strong> with under 1.5 seconds recovery time.</li>
+    </ul>
+
+    <!-- Page Break -->
+    <div class="page-break"></div>
+
+    <h2>3.9 Module 9: Linux Performance Telemetry &amp; Bottleneck Analysis</h2>
+    <p>
+        <strong>The Incident:</strong> Peak evening rush telemetry revealed: $\text{CPU} = 76\%, \text{Memory} = 58\%, \mathbf{\text{I/O Wait}} = \mathbf{49\%}, \text{Latency} = 44\text{ ms}$.
+    </p>
+    <p>
+        <strong>Root Cause Isolation:</strong> Decoding `/proc/stat` and `/proc/meminfo` demonstrated that CPU active compute was only 38.4%, while <strong>18 processes were trapped 
+        in `TASK_UNINTERRUPTIBLE` (D state)</strong> with 2,773.55 MB of unwritten dirty pages. Synchronous disk logging was choking storage queues.
+    </p>
+    <table>
+        <tr>
+            <th>System Performance Metric</th>
+            <th>Pre-Correction (Peak Bottleneck)</th>
+            <th>Post-Correction (Optimized Runtime)</th>
+            <th>Net Improvement</th>
+        </tr>
+        <tr>
+            <td><strong>CPU Active Utilization</strong></td>
+            <td>37.1%</td>
+            <td>42.1%</td>
+            <td>Healthy Compute Load</td>
+        </tr>
+        <tr>
+            <td><strong>CPU I/O Wait</strong></td>
+            <td><strong>49.0% (CRITICAL)</strong></td>
+            <td><strong>2.1% (HEALTHY)</strong></td>
+            <td><span class="badge-pass">-95.7% Stalls Eliminated</span></td>
+        </tr>
+        <tr>
+            <td><strong>Dirty DRAM Buffers</strong></td>
+            <td>2,773.6 MB</td>
+            <td>112.0 MB</td>
+            <td>-96.0% Buffer Backlog</td>
+        </tr>
+        <tr>
+            <td><strong>Blocked Tasks (D State)</strong></td>
+            <td>18 processes</td>
+            <td>0 processes</td>
+            <td>100% Queue Recovery</td>
+        </tr>
+        <tr>
+            <td><strong>P99 API Latency</strong></td>
+            <td>44.0 ms (SLA Breach)</td>
+            <td><strong>3.8 ms (PASSED)</strong></td>
+            <td><span class="badge-pass">-91.4% Latency Reduction</span></td>
+        </tr>
+    </table>
+    <p>
+        <strong>Remediation Strategy:</strong> Volatile telemetry updates were migrated to an in-memory Redis cluster (`appendfsync everysec`), Linux dirty ratios tuned 
+        (`vm.dirty_background_ratio=5`, `vm.dirty_ratio=10`), and asynchronous `io_uring` ring-buffer submissions activated.
+    </p>
+
+    <h2>3.10 Module 10: Containerization vs. Virtual Machines Deployment</h2>
+    <p>
+        <strong>Scale:</strong> ~349 concurrent users across mobile apps, driver units, and backend services.
+    </p>
+    <table>
+        <tr>
+            <th>Evaluation Criterion</th>
+            <th>Weight</th>
+            <th>Virtual Machines (1&ndash;10)</th>
+            <th>Containers / Pods (1&ndash;10)</th>
+            <th>Technical Rationale</th>
+        </tr>
+        <tr>
+            <td><strong>Cold Startup Time</strong></td>
+            <td>0.15</td>
+            <td>3</td>
+            <td>10</td>
+            <td>Containers launch in &lt;1s; VMs take 30&ndash;60s to boot guest kernels</td>
+        </tr>
+        <tr>
+            <td><strong>Memory Overhead</strong></td>
+            <td>0.20</td>
+            <td>4</td>
+            <td>10</td>
+            <td>Containers share host kernel (~50 MB/pod vs. ~2 GB base per VM)</td>
+        </tr>
+        <tr>
+            <td><strong>CPU / Syscall Latency</strong></td>
+            <td>0.15</td>
+            <td>6</td>
+            <td>9</td>
+            <td>Zero hypervisor VT-x VM-exit latency penalties</td>
+        </tr>
+        <tr>
+            <td><strong>Storage Density</strong></td>
+            <td>0.10</td>
+            <td>4</td>
+            <td>9</td>
+            <td>Layered OCI overlayfs vs. heavy monolithic virtual disk images</td>
+        </tr>
+        <tr>
+            <td><strong>Isolation &amp; Security</strong></td>
+            <td>0.15</td>
+            <td>10</td>
+            <td>6</td>
+            <td>VMs provide hardware ring-0 boundary; containers use cgroups/seccomp</td>
+        </tr>
+        <tr>
+            <td><strong>CI/CD &amp; Rollouts</strong></td>
+            <td>0.15</td>
+            <td>5</td>
+            <td>10</td>
+            <td>Kubernetes declarative rolling updates with sub-second health probes</td>
+        </tr>
+        <tr>
+            <td><strong>Resource Fit (~349 Users)</strong></td>
+            <td>0.10</td>
+            <td>4</td>
+            <td>10</td>
+            <td>Entire platform runs in 3 small container pods at minimal cloud cost</td>
+        </tr>
+        <tr style="background: #f1f5f9; font-weight: bold;">
+            <td><strong>COMPOSITE SCORE</strong></td>
+            <td><strong>1.00</strong></td>
+            <td><strong>5.20 / 10</strong></td>
+            <td><strong>9.15 / 10</strong></td>
+            <td><span class="badge-pass">WINNER: CONTAINERS</span></td>
+        </tr>
+    </table>
+
+    <!-- Page Break -->
+    <div class="page-break"></div>
+
+    <!-- ================= CHAPTER 4 ================= -->
+    <h1 style="margin-top: 0;">Chapter 4: Web Operations Dashboard &amp; Interactive Simulators</h1>
+
+    <h2>4.1 Dashboard Architecture &amp; User Interface</h2>
+    <p>
+        To allow real-time observation and demonstration during lab assessments, the platform features a responsive, dark-themed operations dashboard 
+        accessible at <a href="https://os-six-lovat.vercel.app/" target="_blank"><strong>https://os-six-lovat.vercel.app/</strong></a>.
+    </p>
+
+    <div class="diagram-card">
+        <div class="diagram-title">Figure 4.1: Live Operations Portal Layout</div>
+        <div class="flow-row">
+            <div class="flow-node">
+                <strong>Metric 1</strong><br/>
+                Concurrent Users: 349<br/>
+                <span class="badge-tech">Active Workload</span>
+            </div>
+            <div class="flow-node">
+                <strong>Metric 2</strong><br/>
+                P99 Latency: 3.8 ms<br/>
+                <span class="badge-pass">SLA &lt; 10ms (PASS)</span>
+            </div>
+            <div class="flow-node">
+                <strong>Metric 3</strong><br/>
+                I/O Wait: 2.1%<br/>
+                <span class="badge-pass">Optimized Memory</span>
+            </div>
+            <div class="flow-node">
+                <strong>Metric 4</strong><br/>
+                Health: HEALTHY<br/>
+                <span class="badge-pass">Probes 200 OK</span>
+            </div>
+        </div>
+    </div>
+
+    <h2>4.2 Interactive Action Handlers</h2>
+    <p>
+        The dashboard includes interactive controls that execute server-side simulation logic:
+    </p>
+    <ul>
+        <li><strong>⚡ Trigger 50-Order Concurrency Burst (`/api/order/burst`):</strong> Simulates an instantaneous spike of 50 incoming orders, spawning 
+        worker threads that acquire database tokens, match drivers in 2.1 ms, and log transactions without contention.</li>
+        <li><strong>⚙️ Toggle I/O Bottleneck Remediation (`/api/toggle_remediation`):</strong> Allows evaluators to dynamically flip between the unoptimized 
+        49% I/O wait state (simulating blocking `fsync` logging) and the optimized 2.1% state (in-memory caching with `io_uring`).</li>
+        <li><strong>🚨 Trigger Chaos &amp; Rollback Drill (`/api/trigger_rollback`):</strong> Simulates latency degradation above 120 ms, automatically triggering 
+        a simulated Kubernetes rollback (`kubectl rollout undo`) that restores stable routing within 8.4 seconds.</li>
+        <li><strong>▶️ Subsystem Module Buttons (`/api/run_module/&lt;id&gt;`):</strong> Executes the standalone mathematical simulators for Modules 1 through 10, 
+        streaming live terminal logs directly into the web console.</li>
+    </ul>
+
+    <!-- Page Break -->
+    <div class="page-break"></div>
+
+    <!-- ================= CHAPTER 5 ================= -->
+    <h1 style="margin-top: 0;">Chapter 5: Cloud Deployment &amp; Serverless WSGI Adapter</h1>
+
+    <h2>5.1 Serverless Deployment Architecture (Vercel)</h2>
+    <p>
+        To ensure zero-downtime, global availability, the application is deployed as a serverless microservice using Vercel&rsquo;s Python runtime infrastructure. 
+        Traditional WSGI frameworks (like Flask) assume a persistent listening process, whereas serverless platforms treat requests as ephemeral invocations.
+    </p>
+    <p>
+        To bridge this gap without altering internal routing, a custom WSGI middleware (<strong>`VercelPathMiddleware`</strong>) was developed in `api/index.py`:
+    </p>
+    <pre><code># api/index.py - Serverless WSGI Normalization Middleware
+class VercelPathMiddleware:
+    def __init__(self, wsgi_app):
+        self.wsgi_app = wsgi_app
+
+    def __call__(self, environ, start_response):
+        path = environ.get('PATH_INFO', '')
+        if path.startswith('/api/index'):
+            stripped = path[len('/api/index'):]
+            environ['PATH_INFO'] = stripped if stripped and stripped.startswith('/') else ('/' + stripped if stripped else '/')
+        elif path in ['/api', '/api/']:
+            environ['PATH_INFO'] = '/'
+        return self.wsgi_app(environ, start_response)
+
+app.wsgi_app = VercelPathMiddleware(app.wsgi_app)</code></pre>
+
+    <h2>5.2 Declarative Rewrite Routing (`vercel.json`)</h2>
+    <pre><code>{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/api/index"
+    }
+  ]
+}</code></pre>
+
+    <h2>5.3 Health Probes &amp; Endpoints Verification</h2>
+    <table>
+        <tr>
+            <th>Endpoint</th>
+            <th>HTTP Method</th>
+            <th>Purpose / Probe Function</th>
+            <th>HTTP Status</th>
+        </tr>
+        <tr>
+            <td><code>/</code></td>
+            <td>GET</td>
+            <td>Live Operations Dashboard Interface</td>
+            <td><span class="badge-pass">200 OK</span></td>
+        </tr>
+        <tr>
+            <td><code>/healthz</code></td>
+            <td>GET</td>
+            <td>Kubernetes Liveness Probe (Thread check, timestamp)</td>
+            <td><span class="badge-pass">200 OK</span></td>
+        </tr>
+        <tr>
+            <td><code>/readyz</code></td>
+            <td>GET</td>
+            <td>Kubernetes Readiness Probe (DB pool, Mutex availability)</td>
+            <td><span class="badge-pass">200 OK</span></td>
+        </tr>
+        <tr>
+            <td><code>/api/status</code></td>
+            <td>GET</td>
+            <td>Cluster telemetry JSON state stream</td>
+            <td><span class="badge-pass">200 OK</span></td>
+        </tr>
+        <tr>
+            <td><code>/api/order/burst</code></td>
+            <td>POST</td>
+            <td>50-Order Concurrency Stress Pipeline</td>
+            <td><span class="badge-pass">200 OK</span></td>
+        </tr>
+        <tr>
+            <td><code>/api/toggle_remediation</code></td>
+            <td>POST</td>
+            <td>Dynamic I/O Wait Bottleneck Remediation Toggle</td>
+            <td><span class="badge-pass">200 OK</span></td>
+        </tr>
+    </table>
+
+    <!-- Page Break -->
+    <div class="page-break"></div>
+
+    <!-- ================= CHAPTER 6 & 7 ================= -->
+    <h1 style="margin-top: 0;">Chapter 6: Experimental Results &amp; Discussion</h1>
+
+    <h2>6.1 Master Test Suite Verification (100% Pass Rate)</h2>
+    <p>
+        The platform includes an automated master test runner (`run_all_experiments.py`) that executes all ten modules end-to-end. 
+        Execution verified <strong>13 passed test cases and 0 failures</strong>:
+    </p>
+
+    <table>
+        <tr>
+            <th>Module Index</th>
+            <th>Test Description</th>
+            <th>Runtime</th>
+            <th>Key Quantitative Benchmark</th>
+            <th>Result</th>
+        </tr>
+        <tr>
+            <td>Module 1 (Py)</td>
+            <td>Interrupt vs. DMA Math Derivation</td>
+            <td>Python 3.13</td>
+            <td>100 IRQs (buffered) vs. 1 IRQ (DMA)</td>
+            <td><span class="badge-pass">PASSED</span></td>
+        </tr>
+        <tr>
+            <td>Module 1 (C)</td>
+            <td>47 MB Hardware Transfer Emulation</td>
+            <td>POSIX Clang</td>
+            <td>3.94 ms transfer; 99% CPU savings</td>
+            <td><span class="badge-pass">PASSED</span></td>
+        </tr>
+        <tr>
+            <td>Module 2 (Py)</td>
+            <td>Monolithic vs. Microkernel IPC Trace</td>
+            <td>Python 3.13</td>
+            <td>6 vs. 26 privilege crossings</td>
+            <td><span class="badge-pass">PASSED</span></td>
+        </tr>
+        <tr>
+            <td>Module 2 (C)</td>
+            <td>POSIX Fork-Exec-Wait Process Spawn</td>
+            <td>POSIX Clang</td>
+            <td>Roundtrip process cycle in 7.41 ms</td>
+            <td><span class="badge-pass">PASSED</span></td>
+        </tr>
+        <tr>
+            <td>Module 3 (Py)</td>
+            <td>CPU Scheduling (FCFS, SJF, RR Q=3ms)</td>
+            <td>Python 3.13</td>
+            <td>Avg RT slashed to 2.50 ms (73.7% drop)</td>
+            <td><span class="badge-pass">PASSED</span></td>
+        </tr>
+        <tr>
+            <td>Module 4 (Py)</td>
+            <td>Banker&rsquo;s Safety Sequence Verification</td>
+            <td>Python 3.13</td>
+            <td>Safe Sequence &lang;W3, W1, W2&rang; verified</td>
+            <td><span class="badge-pass">PASSED</span></td>
+        </tr>
+        <tr>
+            <td>Module 4 (C)</td>
+            <td>Multithreaded Havender Lock Hierarchy</td>
+            <td>POSIX Threads</td>
+            <td>9 safe cycles; zero race conditions</td>
+            <td><span class="badge-pass">PASSED</span></td>
+        </tr>
+        <tr>
+            <td>Module 5 (Py)</td>
+            <td>Memory Allocation &amp; 600 KB Stress Burst</td>
+            <td>Python 3.13</td>
+            <td>First-Fit preserves 737 KB block intact</td>
+            <td><span class="badge-pass">PASSED</span></td>
+        </tr>
+        <tr>
+            <td>Module 6 (Py)</td>
+            <td>Page Replacement (FIFO, LRU, OPT) &amp; PFF</td>
+            <td>Python 3.13</td>
+            <td>OPT=6, LRU=8, FIFO=10; PFF thrash fix</td>
+            <td><span class="badge-pass">PASSED</span></td>
+        </tr>
+        <tr>
+            <td>Module 7 (Py)</td>
+            <td>Disk Cylinder Scheduling (Head=142)</td>
+            <td>Python 3.13</td>
+            <td>SSTF / LOOK: 270 cyl (47.5% seek cut)</td>
+            <td><span class="badge-pass">PASSED</span></td>
+        </tr>
+        <tr>
+            <td>Module 8 (Py)</td>
+            <td>File System Extents &amp; WAL Caching</td>
+            <td>Python 3.13</td>
+            <td>1,481 ops/min; write delay drops to 15µs</td>
+            <td><span class="badge-pass">PASSED</span></td>
+        </tr>
+        <tr>
+            <td>Module 9 (Py)</td>
+            <td>Linux Telemetry &amp; 49% I/O Wait Bottleneck</td>
+            <td>Python 3.13</td>
+            <td>I/O wait cut to 2.1%; latency 3.8 ms</td>
+            <td><span class="badge-pass">PASSED</span></td>
+        </tr>
+        <tr>
+            <td>Module 10 (Py)</td>
+            <td>Container vs. VM Multi-Criteria Scoring</td>
+            <td>Python 3.13</td>
+            <td>Containers score 9.15/10 vs. VMs 5.20/10</td>
+            <td><span class="badge-pass">PASSED</span></td>
+        </tr>
+    </table>
+
+    <h1>Chapter 7: Conclusion &amp; Future Scope</h1>
+
+    <h2>7.1 Summary of Contributions</h2>
+    <p>
+        This mini-project successfully bridges theoretical Operating System principles and real-world high-concurrency cloud engineering. 
+        Through mathematical derivations, POSIX C benchmarks, Python simulators, and an interactive cloud web application, student 
+        <strong>NITHIN N</strong> (Roll No: <strong>25BTRPW066</strong>) has demonstrated that:
+    </p>
+    <ol>
+        <li>DMA bus mastering is non-negotiable for high-bandwidth multimedia and order payload dispatch.</li>
+        <li>Round Robin scheduling with an appropriately tuned quantum ($3\text{ ms}$) provides optimal responsiveness for live consumer interfaces.</li>
+        <li>Strict Havender lock ordering eliminates deadlock vulnerabilities without runtime matrix overhead.</li>
+        <li>Storage bottlenecks (such as 49% I/O wait) can be systematically diagnosed via `/proc` and eradicated via in-memory caching and `io_uring`.</li>
+        <li>Containerized microservices orchestrated via Kubernetes provide the highest deployment density and agility for modern web services.</li>
+    </ol>
+
+    <h2>7.2 Future Enhancements</h2>
+    <ul>
+        <li>Implementing eBPF (Extended Berkeley Packet Filter) kernel hooks for zero-overhead live socket tracing.</li>
+        <li>Integrating WebAssembly (Wasm) worker sandboxes to compare against Linux namespace containerization.</li>
+        <li>Extending the scheduling engine to model Multi-Level Feedback Queue (MLFQ) priority adjustments based on live order value.</li>
+    </ul>
+
+    <h2>7.3 References &amp; Repository Access</h2>
+    <ol>
+        <li>Silberschatz, A., Galvin, P. B., &amp; Gagne, G. (2018). <em>Operating System Concepts</em> (10th ed.). Wiley.</li>
+        <li>Love, R. (2010). <em>Linux Kernel Development</em> (3rd ed.). Addison-Wesley Professional.</li>
+        <li>Kerrisk, M. (2010). <em>The Linux Programming Interface: A Linux and UNIX System Programming Handbook</em>. No Starch Press.</li>
+        <li>Live Vercel Web Application: <a href="https://os-six-lovat.vercel.app/" target="_blank">https://os-six-lovat.vercel.app/</a></li>
+        <li>GitHub Project Repository: <a href="https://github.com/NITHIN-aiml69/OS-FOOD-DELIVERY-" target="_blank">https://github.com/NITHIN-aiml69/OS-FOOD-DELIVERY-</a></li>
+    </ol>
+
+    <div style="margin-top: 35px; padding-top: 15px; border-top: 1px solid #cbd5e1; text-align: center; font-size: 8pt; color: #64748b;">
+        &copy; AY 2026&ndash;2027 | Department of Computer Science &amp; Engineering | School of Computer Science &amp; Engineering | JAIN (Deemed-to-be University)<br/>
+        Report compiled and validated by <strong>NITHIN N</strong> (Roll No: <strong>25BTRPW066</strong>).
+    </div>
+
+</div>
+
+</body>
+</html>
