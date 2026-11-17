@@ -1,5 +1,6 @@
 import os
 import sys
+from urllib.parse import parse_qs
 
 # Ensure root directory is on the Python path
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -8,25 +9,29 @@ if ROOT_DIR not in sys.path:
 
 from platform_server import app
 
-# WSGI Middleware to normalize Vercel rewritten PATH_INFO
+# Normalization middleware
 class VercelPathMiddleware:
     def __init__(self, wsgi_app):
         self.wsgi_app = wsgi_app
 
     def __call__(self, environ, start_response):
-        # 1. Check if Vercel passed original requested URI in headers
-        for h in ['HTTP_X_FORWARDED_URI', 'HTTP_X_ORIGINAL_URL', 'HTTP_X_NOW_ROUTE_MATCHES']:
+        qs = parse_qs(environ.get('QUERY_STRING', ''))
+        if '__subpath__' in qs and qs['__subpath__']:
+            sub = qs['__subpath__'][0]
+            environ['PATH_INFO'] = sub if sub else '/'
+            return self.wsgi_app(environ, start_response)
+
+        # Fallback to header inspection if rewrite didn't append query param
+        for h in ['HTTP_X_FORWARDED_URI', 'HTTP_X_ORIGINAL_URL', 'HTTP_X_NOW_ROUTE_MATCHES', 'HTTP_X_MATCHED_PATH', 'RAW_URI']:
             val = environ.get(h)
             if val and not val.startswith('/api/index'):
-                clean_path = val.split('?')[0]
-                environ['PATH_INFO'] = clean_path
+                clean = val.split('?')[0]
+                environ['PATH_INFO'] = clean
                 return self.wsgi_app(environ, start_response)
-        
+
         path = environ.get('PATH_INFO', '')
-        # If the path is exactly /api/index, /api, or /api/, it's the root dashboard
         if path in ['/api/index', '/api/index/', '/api', '/api/']:
             environ['PATH_INFO'] = '/'
-        # If the path is prefixed with /api/index/, strip it so subroutes match cleanly
         elif path.startswith('/api/index/'):
             sub = path[len('/api/index'):]
             environ['PATH_INFO'] = sub if sub else '/'

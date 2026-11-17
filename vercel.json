@@ -2,8 +2,16 @@
   "version": 2,
   "rewrites": [
     {
+      "source": "/api/index",
+      "destination": "/api/index?__subpath__=/"
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index?__subpath__=/api/$1"
+    },
+    {
       "source": "/(.*)",
-      "destination": "/api/index.py"
+      "destination": "/api/index?__subpath__=/$1"
     }
   ]
 }
