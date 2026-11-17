@@ -8,24 +8,29 @@ if ROOT_DIR not in sys.path:
 
 from platform_server import app
 
-# Add aliases for index route to cover Vercel rewrites
-app.add_url_rule('/api/index', 'index_alias_1', app.view_functions['index'])
-app.add_url_rule('/api/index/', 'index_alias_2', app.view_functions['index'])
-app.add_url_rule('/api', 'index_alias_3', app.view_functions['index'])
-app.add_url_rule('/api/', 'index_alias_4', app.view_functions['index'])
-
 # WSGI Middleware to normalize Vercel rewritten PATH_INFO
 class VercelPathMiddleware:
     def __init__(self, wsgi_app):
         self.wsgi_app = wsgi_app
 
     def __call__(self, environ, start_response):
+        # 1. Check if Vercel passed original requested URI in headers
+        for h in ['HTTP_X_FORWARDED_URI', 'HTTP_X_ORIGINAL_URL', 'HTTP_X_NOW_ROUTE_MATCHES']:
+            val = environ.get(h)
+            if val and not val.startswith('/api/index'):
+                clean_path = val.split('?')[0]
+                environ['PATH_INFO'] = clean_path
+                return self.wsgi_app(environ, start_response)
+        
         path = environ.get('PATH_INFO', '')
-        if path.startswith('/api/index'):
-            stripped = path[len('/api/index'):]
-            environ['PATH_INFO'] = stripped if stripped and stripped.startswith('/') else ('/' + stripped if stripped else '/')
-        elif path in ['/api', '/api/']:
+        # If the path is exactly /api/index, /api, or /api/, it's the root dashboard
+        if path in ['/api/index', '/api/index/', '/api', '/api/']:
             environ['PATH_INFO'] = '/'
+        # If the path is prefixed with /api/index/, strip it so subroutes match cleanly
+        elif path.startswith('/api/index/'):
+            sub = path[len('/api/index'):]
+            environ['PATH_INFO'] = sub if sub else '/'
+
         return self.wsgi_app(environ, start_response)
 
 app.wsgi_app = VercelPathMiddleware(app.wsgi_app)
