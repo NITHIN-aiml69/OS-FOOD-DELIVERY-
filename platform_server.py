@@ -12,7 +12,7 @@ import json
 import random
 import threading
 import subprocess
-from flask import Flask, jsonify, request, render_template_string
+from flask import Flask, jsonify, request, render_template_string, send_file
 
 # Always set working directory to this script's directory
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -239,6 +239,9 @@ HTML_DASHBOARD = """
             <button class="btn-danger" onclick="triggerRollback()">🚨 Trigger Chaos & Rollback Drill</button>
             <button onclick="runAllExperiments()">▶️ Run All 10 OS Modules</button>
             <button onclick="checkHealth()">🩺 Check /healthz & /readyz</button>
+            <a href="/report.pdf" download="25BTRPW066-EXPERIENTIAL_LEARNING_REPORT.pdf" style="text-decoration: none;">
+                <button style="background: #1f6feb; color: #ffffff; border-color: #388bfd;">📄 Download 29-Page Report (PDF)</button>
+            </a>
         </div>
 
         <!-- 10 OS Subsystem Interactive Runner -->
@@ -356,6 +359,16 @@ HTML_DASHBOARD = """
 @app.route("/api/index/")
 def index():
     return render_template_string(HTML_DASHBOARD, state=STATE)
+
+@app.route("/report.pdf")
+@app.route("/api/report.pdf")
+@app.route("/download/report")
+@app.route("/api/download/report")
+def download_pdf_report():
+    pdf_path = os.path.join(PROJECT_DIR, "OS_FOOD_DELIVERY_MINI_PROJECT_REPORT.pdf")
+    if os.path.exists(pdf_path):
+        return send_file(pdf_path, as_attachment=True, download_name="25BTRPW066-EXPERIENTIAL_LEARNING_REPORT.pdf", mimetype="application/pdf")
+    return jsonify({"error": "Report PDF not found"}), 404
 
 @app.route("/debug_env", methods=["GET", "POST"])
 @app.route("/api/debug_env", methods=["GET", "POST"])
